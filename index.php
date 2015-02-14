@@ -15,7 +15,7 @@ echo 'User: ';echo $_SESSION['email'];
   <table width="100%">
   <tr>
   <th>
-  <image src="logo.bmp" align="middle" height="75">
+  <image src="logo.png" align="middle" height="75">
   </th>
   <th>
   <font size=5> Feira do Livro </font>
@@ -33,16 +33,33 @@ echo 'User: ';echo $_SESSION['email'];
 <center>
 
 <table width="100%">
-<form method="get" action="criacliente.php">
-    <button type="submit" style="height: 50px; width: 150px">Ver dados Utilizador</button>
+<br></br>
+<form method="get" action="registauser.php">
+    <button type="submit" style="height: 50px; width: 150px">Cria Utilizador</button>
 </form>
 <>
 <form method="get" action="registalivro.php">
-    <button type="submit" style="height: 50px; width: 150px">Registar Livros</button>
+    <button type="submit" style="height: 50px; width: 150px">Registar Livro</button>
 </form>
 <>
-<form method="get" action="consultacliente.php">
-    <button type="submit" style="height: 50px; width: 150px">Consultar Livros</button>
+<form method="get" action="registavenda.php">
+    <button type="submit" style="height: 50px; width: 150px">Registar Venda</button>
+</form>
+<br></br>
+<form method="get" action="consultauser.php">
+    <button type="submit" style="height: 50px; width: 150px">Consultar Utilizador</button>
+</form>
+<>
+<form method="get" action="consultalivros.php">
+    <button type="submit" style="height: 50px; width: 150px">Consultar todos os Livros</button>
+</form>
+<>
+<form method="get" action="consultalivrosvenda.php">
+    <button type="submit" style="height: 50px; width: 150px">Consultar Livros para Venda</button>
+</form>
+<br></br>
+<form method="get" action="consultavendas.php">
+    <button type="submit" style="height: 50px; width: 150px">Consultar Vendas</button>
 </form>
 
 </table>

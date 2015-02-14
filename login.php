@@ -3,7 +3,7 @@
 <script type="text/javascript" src="forms.js"></script>
 
 <center>
-<image src="logo.bmp" align="middle" height="150"><br>
+<image src="logo.png" align="middle" height="150"><br>
 <font size=5> Feira do Livro </font>
 <br><br>
 <?php
