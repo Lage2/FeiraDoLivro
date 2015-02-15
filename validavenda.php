@@ -5,6 +5,17 @@ include 'db_clientes_connect.php';
 sec_session_start();
 
 if(login_check($mysqli) == true) {
+
+$activar = $_POST['activar'];
+
+$N = count($activar);
+    for($i=0; $i < $N; $i++)
+    {	  
+	  $update = "UPDATE product_book SET valid='1' WHERE id= '".$activar[$i]."'";
+	  mysqli_query($mysqli_client,$update);
+ 
+    }
+
 ?>
 <HTML>
 <meta charset="utf-8">
@@ -32,7 +43,7 @@ if(login_check($mysqli) == true) {
   </table>
 <center>
 <br><br><br>
-<font size=5> Livro registado com Sucesso!!!!</font>
+<font size=5> Activados <?php echo $N;?> Livros com Sucesso!!!!</font>
 </center>
 </BODY>
 </HTML>

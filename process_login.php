@@ -11,7 +11,7 @@ if(isset($_POST['email'], $_POST['p'])) {
       // Login com sucesso
 	  $_SESSION['email'] = $email; // Pega o valor da coluna 'id do registro encontrado no MySQL
       $_SESSION['password'] = $password; // Pega o valor da coluna 'nome' do registro encontrado no MySQL
-      header('Location: ./index.php?$email');
+      header('Location: ./index.php');
    } else {
       // Falha de login
       header('Location: ./login.php?error=1');

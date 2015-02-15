@@ -16,7 +16,7 @@ echo 'User: ';echo $_SESSION['email'];
   <table width="100%" >
   <tr>
   <th>
-  <image src="logo.bmp" align="middle" height="75">
+  <image src="logo.png" align="middle" height="75">
   </th>
   <th>
   <font size=5> Regista Livro</font>

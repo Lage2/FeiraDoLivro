@@ -1,7 +1,3 @@
-<meta charset="utf-8">
-<script type="text/javascript" src="sha512.js"></script>
-<script type="text/javascript" src="forms.js"></script>
-
 <?php header("Content-Type: text/html; charset=ISO-8859-1",true);
 include 'db_connect.php';
 include 'functions.php';
@@ -23,7 +19,7 @@ echo 'User: ';echo $_SESSION['email'];
   <image src="logo.png" align="middle" height="75">
   </th>
   <th>
-  <font size=5> Regista Utilizador</font>
+  <font size=5> Validar Venda</font>
   </th>
   <th>
   <form method="get" action="index.php">
@@ -36,17 +32,12 @@ echo 'User: ';echo $_SESSION['email'];
   </tr>  
   </table>
 <br>
-<form name="senddata" method="post" enctype="multipart/form-data" action="insuser.php">
+<form name="senddata" method="post" action="validarvenda2.php">
 <table width="100%" border="0" cellspacing="2" cellpadding="2">
-
-<table width="100%">
-Username: <input name="username" type="text" size="40" maxlength="30" autofocus required/><br><br>
-Email: <input name="email" type="text" size="40" maxlength="50" required/><br><br>
-Password: <input name="password" type="text" id="password" size="40" maxlength="50" required/>
-</table>
+Email Utilizador: <input name="email" type="email" size="40" maxlength="50" autofocus required/>
 <br>
 <tr>
-<td><input name="enviar" type="submit" style="height: 50px; width: 150px" value="Regista Utilizador"/></td><br><br>
+<td><input name="enviar" type="submit" style="height: 50px; width: 150px" value="Procurar Utilizador"/></td><br><br>
 </tr>
 </table>
 </form>

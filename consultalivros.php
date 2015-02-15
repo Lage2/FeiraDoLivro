@@ -39,7 +39,7 @@ if (mysqli_num_rows($qry)==0){
 ?>
 <center>
 <br><br><br>
-<font size=5> Não existem clientes!!!!</font>
+<font size=5> Não existem Livros!!!!</font>
 </center>
 <?
 

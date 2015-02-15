@@ -32,7 +32,7 @@ if(login_check($mysqli) == true) {
   </table>
 <center>
 <br><br><br>
-<font size=5> Livro registado com Sucesso!!!!</font>
+<font size=5> Venda registada com Sucesso!!!!</font>
 </center>
 </BODY>
 </HTML>

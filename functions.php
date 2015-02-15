@@ -1,4 +1,5 @@
 <?php
+
 function sec_session_start() {
         $session_name = 'sec_session_id'; // Define um nome padrão de sessão
         $secure = false; // Defina como true (verdadeiro) caso esteja utilizando https.
