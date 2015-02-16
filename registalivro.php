@@ -36,7 +36,7 @@ echo 'User: ';echo $_SESSION['email'];
 <table width="100%" border="0" cellspacing="2" cellpadding="2">
 
 <table width="100%">
-ISBN: <input name="isbn" type="text" size="40" maxlength="13" autofocus required/><br><br>
+ISBN: <input name="isbn" type="text" size="40" maxlength="13" autofocus required/> (13 digitos)<br><br>
 Nome: <input name="nome" type="text" size="40" maxlength="50" required/><br><br>
 Autor 1: <input name="autor1" type="text" size="40" maxlength="50" required/><br><br>
 Autor 2: <input name="autor2" type="text" size="40" maxlength="50"/><br><br>
