@@ -22,7 +22,7 @@ if(login_check($mysqli) == true)
 		$author1_post 	= $_POST['author1'];
 		$author2_post 	= $_POST['author2'];
 		$price_post 	= $_POST['price'];
-		$seller_session	= $_SESSION['email'];
+		$seller_session	= $_SESSION['username'];
 
 		//TODO: check if posted isbn matches values provided
 		$stmt1 = $mysqli_client->stmt_init();
@@ -48,16 +48,15 @@ if(login_check($mysqli) == true)
 			echo json_encode($data);
 			die;
 		}
-
 		
 		$stmt2 = $mysqli_client->stmt_init();
-		if($stmt2->prepare("INSERT INTO product_book (isbn, seller, price, valid, sold) VALUES (?,?,? 0,0)")){
+		if($stmt2->prepare("INSERT INTO product_book (isbn, seller, price, valid, sold) VALUES (?,?,?,'0','0')")){
 			$stmt2->bind_param("ssd", $isbn_bind, $seller_bind, $price_bind);
 			$isbn_bind 		= $isbn_post;
 			$seller_bind 	= $seller_session;
 			$price_bind		= $price_post;
 
-			$stmt2->execute();
+			//$stmt2->execute();
 			$stmt2->close();
 
 			$data = array('error'=>0);
@@ -69,6 +68,7 @@ if(login_check($mysqli) == true)
 			echo json_encode($data);
 			die;	
 		}
+		
 
 	}else{
 		$data = array('error'=>1);

@@ -6,11 +6,35 @@ var price_input;
 
 
 function clearForm(event){
+
+	console.log("clear form");
 	isbn_input.empty();
 	price_input.empty();
 	title_input.empty();
 	author1_input.empty();
 	author2_input.empty();
+}
+
+function toggleSuccessAlert(){
+
+	var message = "<p><i class='fa fa-check'></i>  "
+				+ "O seu pedido foi registado com sucesso."
+				+ "</p>"
+
+	$('#error').css('display', 'none');
+	$('#success').append(message);
+	$('#success').toggle('fast');
+	$('#submit').attr('disabled', 'disabled');
+	setTimeout("location.href = 'index.php';", 5000);	
+}
+
+function toggleErrorAlert(message){
+
+	message = "<p><i class='fa fa-times'></i>  "+ message + "</p>";
+	$('#error').empty();
+	$('#error').append(message);
+	$('#error').toggle('fast');
+	setTimeout ( "$('#error').toggle('slow')" , 3000 );
 }
 
 function checkISBN(event){
@@ -38,23 +62,20 @@ function checkISBN(event){
 				if (data.error == 0){
 					console.log("Success: "+data.title+' || '+data.author1+' || '+data.author2);
 					
-					title_input.val(data.title);
-					author1_input.val(data.author1);
+					title_input.val(data.title).attr('disabled', 'disabled');
+					author1_input.val(data.author1).attr('disabled', 'disabled');
 					if(data.author2==='none') author2_input.attr('disabled','disabled'); else author2.val(data.author2);
 
-					$('#book-cover-holder').append("<img class='book-cover' src=images/"+isbn+".jpg>");
+					$('#book-cover-holder').empty().append("<img class='book-cover' src=images/"+isbn+".jpg>");
 
 				}else
-					console.log("Error: "+data.error);
-					//toggleErrorAlert(data.error);
-			}, 
+					console.log("Error: " + data.error);
+ 			}, 
 			error: function(jqXHR, textStatus, errorThrown){
 				console.log("Fail: "+textStatus+' || '+errorThrown);
-		}
-	});
-
-	}else
-		console.log('do nothing');
+			}
+		});
+	}
 }
 
 function registerBookSale(event){
@@ -63,12 +84,14 @@ function registerBookSale(event){
 	var price 	= price_input.val();
 
 	if(!validateISBN(isbn)){
-		console.log("error isbn");
+		console.log("Error: invalid ISBN");
+		toggleErrorAlert("Por favor insira um ISBN válido.")
 		return;
 	}
 
 	if(!validatePrice(price)){
-		console.log("error price");
+		console.log("Error: invalid price");
+		toggleErrorAlert("Por favor insira um preço válido.");
 		return;	
 	}
 
@@ -88,15 +111,12 @@ function registerBookSale(event){
 			processData: false,
 			contentType: false,
 			success: function(data, textStatus, jqXHR){
-		
-				console.log(data);
 
 				if (data.error == 0){
-					//DO something
-					console.log("success");
+					toggleSuccessAlert();
 				}else
 					console.log("Error: "+data.error);
-					//toggleErrorAlert(data.error);
+					toggleErrorAlert(data.error-message);
 			}, 
 			error: function(jqXHR, textStatus, errorThrown){
 				console.log("Fail: "+textStatus+' || '+errorThrown);

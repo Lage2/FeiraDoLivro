@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<?php header("Content-Type: text/html; charset=charset=utf-8",true);
+<?php 
+  header("Content-Type: text/html; charset=utf-8",true);
   include 'database/db_connect.php';
   include 'database/db_clientes_connect.php';
   include 'database/functions.php';
@@ -9,9 +10,9 @@
   if(login_check($mysqli) == true)
     $logged = true;
 
-  //TODO: descomentar
-  //if(!$logged)
-  //  header('Location: ./login.php');
+  
+  if(!$logged)
+    header('Location: ./login.php');
 ?>
 <html>
   <head>
@@ -26,7 +27,7 @@
       <div class="container-fluid">
         <!-- -->
         <div class="navbar-header">
-          <a class="navbar-brand" href="">
+          <a class="navbar-brand" href="index.php">
             <img alt="Brand" src="img/logo-feira-livro.png">
             <h1>Feira do Livro</h1>
           </a>
@@ -34,23 +35,23 @@
 
         <!-- TODO: devo linkar o js para isto funcionar -->
         <div class="collapse navbar-collapse" id="nav-collapse">
-          <form class="navbar-form navbar-right" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Procurar ISBN">
-            </div>
-            <button type="submit" class="btn btn-default">
-              <i class="fa fa-search"></i>
-            </button>
-          </form>
-
           <ul class="nav navbar-nav navbar-right">
               <?php if($logged) { ?><li><a href="database/process-logout.php">Sair</a></li> <?php } ?>
+              <li><a href="index.php"><i class="fa fa-undo"></i>  Regressar</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
     <div id="sell-book-container" class="container">
+
+      <div id="alert-container" class="container">
+        <div id="success" class="alert alert-success" role="alert">
+        </div>
+        <div id="error" class="alert alert-danger" role="alert">
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-md-8">
           <form>
@@ -89,39 +90,6 @@
       </div>
     </div>
     
-    <!--
-    <hr>
-    <hr>
-    <div id="old">
-      <table width="100%" >
-      <tr>
-      <th>
-      
-      </th>
-      <th>
-      <font size=5> Regista Venda</font>
-      </th>
-      <th>
-      <form method="get" action="index.php">
-        <button type="submit" style="height: 50px; width: 150px">Menu Principal</button>
-      </form>
-      <form method="get" action="logout.php">
-        <button type="submit" style="height: 50px; width: 150px">Sair</button>
-      </form>
-      </th>
-      </tr>  
-      </table>
-      <br>
-      <form name="senddata" method="post" action="registavenda2.php">
-      <table width="100%" border="0" cellspacing="2" cellpadding="2">
-      ISBN: <input name="isbn" type="number" size="40" maxlength="13" autofocus required/>
-      <br>
-      <tr>
-      <td><input name="enviar" type="submit" style="height: 50px; width: 150px" value="Procurar Livro"/></td><br><br>
-      </tr>
-      </table>
-      </form>
-      -->
      <footer>
       <hr class="footer-divider"/>
       <div class="container">
