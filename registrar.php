@@ -50,7 +50,7 @@
 
       <div id="alert-container" class="container">
         <div id="success" class="alert alert-success" role="alert">
-          <a href="#" class="alert-link">...</a>
+          O seu registo foi concretizado com sucesso. Irá ser redireccionado para a página inicial onde poderá entrar.
         </div>
         <div id="error" class="alert alert-danger" role="alert">
           <a href="#" class="alert-link">...</a>

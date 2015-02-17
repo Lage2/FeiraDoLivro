@@ -1,6 +1,7 @@
+var error = false;
 var username_input  = $('input[name=username]');
 var email_input		= $('input[name=email]');
-var password_input  = $('input[name=password]');
+var password_input  = $('input[type=password]');
 var accepts_input   = $('input[type=checkbox]')
 
 function clear_alerts(){
@@ -8,7 +9,30 @@ function clear_alerts(){
 	$('#success').empty();
 }
 
+function toggleSuccessAlert(){
+	$('#error').css('display', 'none');
+	$('#success').append("O seu registo foi concretizado com sucesso. Irá ser redireccionado para a página inicial onde poderá entrar.");
+	$('#success').toggle('fast');
+	//$('#submit').disable();
+	setTimeout("location.href = 'index.php';", 3000);	
+}
+
+function toggleErrorAlert(message){
+
+	if(!error){
+		$('#error').append(message);
+		$('#error').toggle('fast');
+		$('#error').focus();
+		error = true;
+	}else{
+		$('error').empty()
+		$('#error').append(message);
+	}
+
+}
+
 function validateUsername(username){
+
 	if(username.length < 0)
 			return {
 				'valid': false,
@@ -30,7 +54,6 @@ function validateUsername(username){
 		return {'valid': true};
 }
 
-//TODO: acho
 function validateEmail(email) { 
     var re = /^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$/;
     
@@ -45,8 +68,6 @@ function validateEmail(email) {
 
 //TODO: acabar este
 function validatePassword(password){
-	
-
 
 		return {'valid': true};
 }
@@ -92,41 +113,35 @@ function processUser(event){
 
 	if(!validation_res.valid){
 		console.log("here "+validation_res.message);
-		$('#error').append(validation_res.message);
-		$('#error').toggle('fast');
-		$('#error').focus();
+		toggleErrorAlert(validation_res.message);
 		return;
 	}
 	
 	var data = new FormData();
-	var user_data = {
-		'username': username_input.val(),
-		'email': 	email_input.val(),
-		'password': password_input.val()
-	};
 
 	data.append('username', username_input.val());
-	data.append('email', username_input.val());
-	data.append('password', username_input.val());
+	data.append('email', email_input.val());
+	data.append('password', password_input.val());
 	
+	console.log(data);
 	
 	$.ajax({
-		data: data,
 		url: 'database/process-regiter.php',
 		type: 'post',
+		data: data,
 		cache: false,
+		dataType: 'json',
 		processData: false,
 		contentType: false,
 		success: function(data, textStatus, jqXHR){
 	
-			console.log(data);
-
 			if (typeof data.error === 'undefined'){
 				console.log("Success: "+data.error);
+				toggleSuccessAlert();
 			}else
-				console.log("Error: "+data.error);
+				toggleErrorAlert(data.error);
 		}, 
-		error: function(jqXHR, testStatus, errorThrown){
+		error: function(jqXHR, textStatus, errorThrown){
 			console.log("Fail: "+textStatus);
 		}
 	});
@@ -135,6 +150,5 @@ function processUser(event){
 /* MAIN */
 $(document).ready(function(){
 	console.log("'registar.php' page is ready...");
-
 	$('#submit').on('click', processUser);
 });

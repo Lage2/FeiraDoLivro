@@ -3,9 +3,21 @@
 	include 'db_connect.php';
 	include 'functions.php';
 
+	$data = array();
+
 	$username_post  = $_POST['username'];
 	$email_post 	= $_POST['email'];
-	$password_post  = $_POST['password'];
+	$password_post 	= $_POST['password'];
+
+	//Validate Fields
+	if (!filter_var($email_post, FILTER_VALIDATE_EMAIL)) {
+    	$data = array('error' => 'Por favor introduza um endereço e-mail correcto.' , 'erro-code' => 3);
+		echo json_encode($data);
+		die;	
+	}
+
+	//TODO: validate username
+	//TODO: valide password
 
 	//Check for duplicate values
 	$dup_username 	= false;
@@ -19,7 +31,6 @@
 		$stmt1->execute();
 		$stmt1->bind_result($res_username, $res_email);
 
-		$res = 0;
 		while ($stmt1->fetch()){
 
 			if ($res_username == $username_post) {
@@ -31,24 +42,25 @@
 				$dup_email = true;
 				break;
 			}
-
-			$res++;
 		}
 
 		$stmt1->close();
 
-		if($dup_username) $data = array('error' => 'O nome de utilizador já se encontra registado.' . $res );
-		if($dup_email) 	  $data = array('error' => 'O email já se encontra registado.' . $res );
+		if($dup_username) $data = array('error' => 'O nome de utilizador já se encontra registado.' , 'erro-code' => 1);
+		if($dup_email) 	  $data = array('error' => 'O email já se encontra registado.', 'error-code' => 2);
 		
 		if($dup_username || $dup_email){
 			echo json_encode($data);
 			die;
-		}					
+		}		
 	}else{
-
+		$data = array('error' => 'De momento é impossível completar o registo, por favor tente mais tarde.' , 'erro-code' => 0);
+		echo json_encode($data);
+		die;
 	}
 
-	
+
+	//Register User
 	$password = hash('sha512',$_POST['password']);
 
 	// Crie um salt aleatório
@@ -64,11 +76,14 @@
 		$email_bind 	= $email_post;
 		$password_bind	= $password;
 		$salt_bind		= $random_salt;
-
 		$stmt2->execute();
 		$stmt2->close();
-		header(userok.php);
-	}else{
 
+		echo json_encode($data);
+		
+	}else{
+		$data = array('error' => 'De momento é impossível completar o registo, por favor tente mais tarde.' , 'erro-code' => 0);
+		echo json_encode($data);
+		die;
 	}
 ?>
