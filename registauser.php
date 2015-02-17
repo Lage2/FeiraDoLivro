@@ -1,21 +1,10 @@
+<html>
+<head>
 <meta charset="utf-8">
 <script type="text/javascript" src="sha512.js"></script>
 <script type="text/javascript" src="forms.js"></script>
-
-<?php header("Content-Type: text/html; charset=ISO-8859-1",true);
-include 'db_connect.php';
-include 'functions.php';
-include 'db_clientes_connect.php';
-sec_session_start();
-
-if(login_check($mysqli) == true) {
-echo 'User: ';echo $_SESSION['email'];
-?>
-<HTML>
-<meta charset="utf-8">
-  <HEAD>
   <TITLE>Feira do Livro - LAGE2</TITLE>
-  </HEAD>
+  </head>
   <BODY>
   <table width="100%" >
   <tr>
@@ -52,9 +41,3 @@ Password: <input name="password" type="text" id="password" size="40" maxlength="
 </form>
 </BODY>
 </HTML>
-
-<?php
-} else {
-   header('Location: ./login.php');
-}
-?>

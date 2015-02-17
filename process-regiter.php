@@ -19,8 +19,12 @@ $pedido .= "'".$_POST['email']."',";
 $pedido .= "'".$password."',";
 $pedido .= "'".$random_salt."',";
 $pedido .= "0)";
-mysqli_query($mysqli,$pedido) or die(mysqli_error($mysqli));
 
-header('Location: ./userok.php');
+
+echo "<h1>". $_POST['username'] ."</h1">
+
+//mysqli_query($mysqli,$pedido) or die(mysqli_error($mysqli));
+
+//header('Location: ./userok.php');
 
 ?>

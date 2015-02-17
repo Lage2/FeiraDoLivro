@@ -1,0 +1,133 @@
+@import "bootstrap.less";
+
+/* Functions */
+.border-radius(@r) when (isnumber(@r)) and not (@r = 0) {
+    -webkit-border-radius: @r;
+       -moz-border-radius: @r;
+            border-radius: @r;
+}
+
+/* Color */
+@main-color: 			#0078A6;
+@secondary-color:	    #006084;
+@alternative-color:		#00B467;
+
+body {
+	padding-top: 60px;
+}
+
+#navigation {
+	
+	width: 90%;
+	//max-width: 1024px;
+
+	margin-left: auto;
+	margin-right: auto;
+	background-color: @main-color;
+
+	.border-radius(5px);
+
+	.navbar-brand {
+		
+		margin: 0;
+		padding: 0; 
+
+		img {
+			width: 	60px;
+			height: auto;
+			padding: 5px;
+			display: inline;
+		}	
+
+		h1 {
+			font-size: 1.5em;
+			line-height: 25px;
+			display: inline;
+			color: whitesmoke;//#2E2E2E;
+			text-decoration: none;
+		}
+	}	
+
+	.navbar-nav {
+
+		li a {
+			color: whitesmoke;
+			font-size: 1.2em;
+
+			&:hover{
+				background-color: @secondary-color;
+			}
+		}
+	}
+}
+
+#available-books {
+
+	ul{ margin-top: 50px; }
+
+	li {
+		list-style-type: none;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		margin-left: 15px;
+		font-size: 1.1em;
+
+		span { font-weight: 700; font-size: 1.2em}
+	}
+
+	th {
+		text-align: center;
+	}
+
+	.book-price {
+		text-align: center;
+	}
+}
+
+.book-cover {
+	width: 200px;
+	img {
+		width: 150px;
+		height: auto;
+	}
+}
+
+footer{
+	height: 100px;
+	background-color: #F4F4F4;
+	.footer-divider { width: 90%; }
+
+	#lage2-logo {
+		img {
+			width: 130px;
+			height: auto;
+		}
+	}
+
+	#copyrights {
+		text-align: right;
+
+		a {
+			text-decoration: none;
+			color: orange;
+		}
+	}
+}
+
+
+#register-user-container {
+	margin-top: 50px;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+
+	#alert-container{
+		width: 100%;
+		margin-top: 30px;
+		//min-height: 90px;
+
+		#error{display: none};
+		#success{display: none};
+	}
+	
+}
