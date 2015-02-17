@@ -25,7 +25,7 @@ echo 'User: ';echo $_SESSION['email'];
   <image src="logo.png" align="middle" height="75">
   </th>
   <th>
-  <font size=5> Validar Venda</font>
+  <font size=5> Dados Utilizador</font>
   </th>
   <th>
   <form method="get" action="index.php">
@@ -38,7 +38,7 @@ echo 'User: ';echo $_SESSION['email'];
   </tr>  
   </table>
 <br>
-<form name="senddata" method="post" action="validarvenda2.php">
+<form name="senddata" method="post" action="consultauser_admin2.php">
 <table width="100%" border="0" cellspacing="2" cellpadding="2">
 Email Utilizador: <input name="email" type="email" size="40" maxlength="50" autofocus required/>
 <br>
@@ -55,8 +55,7 @@ Email Utilizador: <input name="email" type="email" size="40" maxlength="50" auto
 else {
    header('Location: ./index.php');
 }
-}
-else {
+} else {
    header('Location: ./login.php');
 }
 ?>

@@ -5,13 +5,17 @@ include 'db_clientes_connect.php';
 sec_session_start();
 
 if(login_check($mysqli) == true) {
-$pesquisa = "email= '".$_SESSION['email']."'";
 
-$qry = mysqli_query($mysqli,"select admin from members where ".$pesquisa);
-$r = mysqli_fetch_array($qry);
+$registar = $_POST['registar'];
 
-if($r['admin']==1){
-echo 'User: ';echo $_SESSION['email'];
+$N = count($registar);
+    for($i=0; $i < $N; $i++)
+    {	  
+	  $update = "UPDATE product_book SET sold='1' WHERE id= '".$registar[$i]."'";
+	  mysqli_query($mysqli_client,$update);
+ 
+    }
+
 ?>
 <HTML>
 <meta charset="utf-8">
@@ -25,7 +29,7 @@ echo 'User: ';echo $_SESSION['email'];
   <image src="logo.png" align="middle" height="75">
   </th>
   <th>
-  <font size=5> Validar Venda</font>
+  <font size=5> Feira do Livro</font><br>
   </th>
   <th>
   <form method="get" action="index.php">
@@ -37,26 +41,15 @@ echo 'User: ';echo $_SESSION['email'];
   </th>
   </tr>  
   </table>
-<br>
-<form name="senddata" method="post" action="validarvenda2.php">
-<table width="100%" border="0" cellspacing="2" cellpadding="2">
-Email Utilizador: <input name="email" type="email" size="40" maxlength="50" autofocus required/>
-<br>
-<tr>
-<td><input name="enviar" type="submit" style="height: 50px; width: 150px" value="Procurar Utilizador"/></td><br><br>
-</tr>
-</table>
-</form>
+<center>
+<br><br><br>
+<font size=5>Livro Vendido com Sucesso!!!!</font>
+</center>
 </BODY>
 </HTML>
 
 <?php
-}
-else {
-   header('Location: ./index.php');
-}
-}
-else {
+} else {
    header('Location: ./login.php');
 }
 ?>

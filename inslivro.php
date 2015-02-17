@@ -49,7 +49,7 @@ mysqli_query($mysqli_client,$pedido) or die(mysqli_error($mysqli_client));
                 else//tamanho inferior
                 {
                     //Gera um nome para a imagem
-                    $image_name=$_POST['isbn'].'.'.$extension;
+                    $image_name=$_POST['isbn'].'.'.'jpg';
 					echo $image_name;
 
                     //Directoria para a qual a imagem será enviada

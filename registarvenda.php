@@ -25,7 +25,7 @@ echo 'User: ';echo $_SESSION['email'];
   <image src="logo.png" align="middle" height="75">
   </th>
   <th>
-  <font size=5> Validar Venda</font>
+  <font size=5> Registar Venda</font>
   </th>
   <th>
   <form method="get" action="index.php">
@@ -38,12 +38,12 @@ echo 'User: ';echo $_SESSION['email'];
   </tr>  
   </table>
 <br>
-<form name="senddata" method="post" action="validarvenda2.php">
+<form name="senddata" method="post" action="registarvenda2.php">
 <table width="100%" border="0" cellspacing="2" cellpadding="2">
-Email Utilizador: <input name="email" type="email" size="40" maxlength="50" autofocus required/>
+ID Livro: <input name="id" type="number" size="40" maxlength="50" autofocus required/>
 <br>
 <tr>
-<td><input name="enviar" type="submit" style="height: 50px; width: 150px" value="Procurar Utilizador"/></td><br><br>
+<td><input name="enviar" type="submit" style="height: 50px; width: 150px" value="Procurar Livro"/></td><br><br>
 </tr>
 </table>
 </form>

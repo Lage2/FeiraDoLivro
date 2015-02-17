@@ -25,7 +25,7 @@ if($r['admin']==1){
   </th>
   <th style="border:0px; padding:0px; background-color:#FFFFFF;">
   <font size=5> Feira do Livro</font><br>
-  <font size=4> Consulta Livros</font>
+  <font size=4> Consulta Vendas</font>
   </th>
   <th style="border:0px; padding:0px; background-color:#FFFFFF;">
   <form method="get" action="index.php">
@@ -40,31 +40,40 @@ if($r['admin']==1){
 
 <?
 
-$qry = mysqli_query($mysqli_client,"select * from book");
+$qry = mysqli_query($mysqli_client,"select * from product_book where valid=1 and sold=1");
 if (mysqli_num_rows($qry)==0){
 ?>
 <center>
 <br><br><br>
-<font size=5> Não existem Livros!!!!</font>
+<font size=5> Não existem Livros Vendidos!!!!</font>
 </center>
 <?
 
 }else{
+$valor_vendas = 0;
 while($r = mysqli_fetch_array($qry)){
+$pesquisa3 = "isbn= '".$r['isbn']."'";
+$qry2 = mysqli_query($mysqli_client,"select name from book where ".$pesquisa3);
+$r2 = mysqli_fetch_array($qry2);
+$valor_vendas += $r['price'];
 ?>
 
 
 <table width="100%">
 <tr>
 <th width="50%" align="left" style="border:0px; padding:0px;">
-<br>Nome: <?php echo $r['name']; ?><br><br>ISBN: <?php echo $r['isbn']; ?><br><br>Autor 1: <?php echo $r['author1']; ?><br><br>Autor 2: <?php echo $r['author2']; ?><br>
+<br>Nome: <?php echo $r2['name']; ?><br><br>ISBN: <?php echo $r['isbn']; ?><br><br>Vendedor: <?php echo $r['seller']; ?><br><br>Preço: <?php echo $r['price']; ?><br>
 </th>
 <td width="25%" align="center" style="border:0px; padding:0px;"><image src="images/<?php echo $r['isbn'];?>.jpg" align="middle" height="150px"></td>
 </tr>  
 </table>
 <br>
 <?
-}}
+}
+
+echo 'Valor total de vendas: '.$valor_vendas;
+
+}
 ?>
 <?php
 }
