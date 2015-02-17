@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<?php header("Content-Type: text/html; charset=charset=utf-8",true);
+<?php 
+  //header("Content-Type: text/html; charset=charset=utf-8",true);
+  //header('Content-Type:text/xml; charset=UTF-8', true);
+  header("Content-Type: text/html; charset=UTF-8");
   include 'database/db_connect.php';
   include 'database/db_clientes_connect.php';
   include 'database/functions.php';
+  
+  $logged = false;
+  sec_session_start();
+  if(login_check($mysqli) == true)
+    $logged = true;
+
 ?>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
     <title>Feira do Livro - LAGE2</title>
 
     <link href="css/style.css" type="text/css" rel="stylesheet"/> 
-
-    <!-- Fontawesome Icons -->
     <link href="css/font-awesome.min.css" rel="stylesheet"/>
+
+
   </head>
   <body>
     <nav id="navigation" class="navbar navbar-fixed-top" role="navigation">
@@ -35,10 +45,12 @@
               <i class="fa fa-search"></i>
             </button>
           </form>
+
           <ul class="nav navbar-nav navbar-right">
-             <li><a href="login.php">Entrar</a></li>
-             <li><a href="database/process-logout.php">Sair</a></li>
-             <li><a href="registrar.php">Registrar</a></li>
+              <?php if($logged) { ?><li><a href="vender-livro.php">Vender Livro</a></li><?php } ?>
+              <?php if(!$logged){ ?><li><a href="login.php">Entrar</a></li><?php } ?>
+              <?php if($logged) { ?><li><a href="database/process-logout.php">Sair</a></li> <?php } ?>
+              <?php if(!$logged){ ?><li><li><a href="registrar.php">Registrar</a></li><?php } ?>
           </ul>
         </div>
       </div>
@@ -46,13 +58,10 @@
 
     <div id="main" class="container">
       <div class="panel panel-default">
-      <!-- Default panel contents -->
-        <!--<div class="panel-heading">Panel heading</div>-->
-        <!--<div class="panel-body"></div>-->
 
         <?php
-          $qry = mysqli_query($mysqli_client,"select * from book");
-          if (mysqli_num_rows($qry)<=0){
+        $qry = mysqli_query($mysqli_client,"select * from book");
+        if (mysqli_num_rows($qry)<=0){
         ?>
           <p>
             A Feira do Livro Técnico Usado vai decorrer entre os dias 15 de Setembro a 3 de Outubro e é dirigida aos estudantes que queiram vender ou comprar livros técnicos.
@@ -60,7 +69,7 @@
           <p>
             É uma oportunidade tanto para "reciclar" os vossos antigos livros como para comprar os novos livros de que precisam com descontos de feira!
           </p>
-        <?php            
+        <?php 
           }else{
         ?>
           <table id="available-books" class="table">
@@ -78,8 +87,8 @@
                 <div class="book-info">
                 <ul>
                   <li><span>ISBN:</span> <?php echo $r['isbn']; ?></li>
-                  <li><span>Título:</span> <?php echo $r['name']; ?></li>
-                  <li><span>Autores:</span> <?php echo $r['author1']; ?> , <?php echo $r['author2']; ?></li>
+                  <li><span>Título:</span> <?php echo utf8_encode($r['name']); ?></li>
+                  <li><span>Autores:</span> <?php echo utf8_encode($r['author1']); ?> , <?php echo $r['author2']; ?></li>
                   <!-- TODO: corrigir para caso não exista autor2 -->
                 </ul>
                 </div>
@@ -115,7 +124,6 @@
         </div>
         </div>
     </footer>
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
   </body>
 </html>
-
-

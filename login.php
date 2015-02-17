@@ -14,7 +14,7 @@
 	      <div class="container-fluid">
 	        <!-- -->
 	        <div class="navbar-header">
-	          <a class="navbar-brand" href="">
+	          <a class="navbar-brand" href="index.php">
 	            <img alt="Brand" src="img/logo-feira-livro.png">
 	            <h1>Feira do Livro</h1>
 	          </a>
