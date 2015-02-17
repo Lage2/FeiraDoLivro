@@ -123,8 +123,6 @@ function processUser(event){
 	data.append('email', email_input.val());
 	data.append('password', password_input.val());
 	
-	console.log(data);
-	
 	$.ajax({
 		url: 'database/process-regiter.php',
 		type: 'post',

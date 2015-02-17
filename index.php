@@ -29,17 +29,17 @@
         <div class="collapse navbar-collapse" id="nav-collapse">
           <form class="navbar-form navbar-right" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Procurar">
+              <input type="text" class="form-control" placeholder="Procurar ISBN">
             </div>
             <button type="submit" class="btn btn-default">
               <i class="fa fa-search"></i>
             </button>
           </form>
           <ul class="nav navbar-nav navbar-right">
-             <li><a href="#">Entrar</a></li>
+             <li><a href="login.php">Entrar</a></li>
+             <li><a href="database/process-logout.php">Sair</a></li>
              <li><a href="registrar.php">Registrar</a></li>
           </ul>
-          
         </div>
       </div>
     </nav>

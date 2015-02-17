@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="nav-collapse">
           <ul class="nav navbar-nav navbar-right">
              <li>
-              <a href="#">
+              <a href="index.php">
                 <i class="fa fa-undo"></i>  Regressar
               </a>
             </li>
@@ -50,7 +50,7 @@
 
       <div id="alert-container" class="container">
         <div id="success" class="alert alert-success" role="alert">
-          O seu registo foi concretizado com sucesso. Irá ser redireccionado para a página inicial onde poderá entrar.
+          <p>O seu registo foi concretizado com sucesso. Irá ser redireccionado para a página inicial onde poderá entrar.</p>
         </div>
         <div id="error" class="alert alert-danger" role="alert">
           <a href="#" class="alert-link">...</a>
