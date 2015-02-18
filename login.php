@@ -23,7 +23,7 @@
 	        <!-- TODO: devo linkar o js para isto funcionar -->
 	        <div class="collapse navbar-collapse" id="nav-collapse">
 	          <ul class="nav navbar-nav navbar-right">
-	             <li><a href="registrar.php">Registrar</a></li>
+	             <li><a href="registar.php">Registar</a></li>
 	             <li><a href="index.php"><i class="fa fa-undo"></i>  Regressar</a></li>
 	          </ul>
 	        </div>

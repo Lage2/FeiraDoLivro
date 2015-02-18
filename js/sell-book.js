@@ -6,13 +6,12 @@ var price_input;
 
 
 function clearForm(event){
-
-	console.log("clear form");
-	isbn_input.empty();
-	price_input.empty();
-	title_input.empty();
-	author1_input.empty();
-	author2_input.empty();
+	isbn_input.val("");
+	price_input.val("");
+	title_input.val("").removeAttr('disabled');
+	author1_input.val("").removeAttr('disabled');
+	author2_input.val("").removeAttr('disabled');
+	$('#book-cover-holder').empty();
 }
 
 function toggleSuccessAlert(){
@@ -24,7 +23,7 @@ function toggleSuccessAlert(){
 	$('#error').css('display', 'none');
 	$('#success').append(message);
 	$('#success').toggle('fast');
-	$('#submit').attr('disabled', 'disabled');
+	//$('#submit').attr('disabled', 'disabled');
 	setTimeout("location.href = 'index.php';", 5000);	
 }
 
@@ -38,8 +37,8 @@ function toggleErrorAlert(message){
 }
 
 function checkISBN(event){
-	
-	var isbn = isbn_input.val();
+	console.log("updating...");	
+	var isbn = isbn_input.val().trim();
 
 	if(validateISBN(isbn)){
 		console.log('query for '+isbn);
@@ -75,10 +74,14 @@ function checkISBN(event){
 				console.log("Fail: "+textStatus+' || '+errorThrown);
 			}
 		});
+	}else{
+		console.log("invalid isbn :'"+isbn+"'");
 	}
 }
 
 function registerBookSale(event){
+
+	event.stopPropagation();
 
 	var isbn 	= isbn_input.val();
 	var price 	= price_input.val();
@@ -114,11 +117,11 @@ function registerBookSale(event){
 
 				if (data.error == 0){
 					toggleSuccessAlert();
-				}else
+				}else{
 					console.log("Error: "+data.error);
-					toggleErrorAlert(data.error-message);
-			}, 
-			error: function(jqXHR, textStatus, errorThrown){
+					toggleErrorAlert(data.error);
+				}
+			}, error: function(jqXHR, textStatus, errorThrown){
 				console.log("Fail: "+textStatus+' || '+errorThrown);
 		}
 	});

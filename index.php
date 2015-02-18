@@ -39,9 +39,9 @@
         <div class="collapse navbar-collapse" id="nav-collapse">
           <form class="navbar-form navbar-right" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Procurar ISBN">
+              <input id="isbn" type="text" class="form-control" placeholder="Procurar ISBN">
             </div>
-            <button type="submit" class="btn btn-default">
+            <button id="search" type="button" class="btn btn-default">
               <i class="fa fa-search"></i>
             </button>
           </form>
@@ -50,7 +50,7 @@
               <?php if($logged) { ?><li><a href="vender-livro.php">Vender Livro</a></li><?php } ?>
               <?php if(!$logged){ ?><li><a href="login.php">Entrar</a></li><?php } ?>
               <?php if($logged) { ?><li><a href="database/process-logout.php">Sair</a></li> <?php } ?>
-              <?php if(!$logged){ ?><li><li><a href="registrar.php">Registrar</a></li><?php } ?>
+              <?php if(!$logged){ ?><li><li><a href="registar.php">Registar</a></li><?php } ?>
           </ul>
         </div>
       </div>
@@ -58,47 +58,10 @@
 
     <div id="main" class="container">
       <div class="panel panel-default">
-
-        <?php
-        $qry = mysqli_query($mysqli_client,"select * from book");
-        if (mysqli_num_rows($qry)<=0){
-        ?>
-          <p>
-            A Feira do Livro Técnico Usado vai decorrer entre os dias 15 de Setembro a 3 de Outubro e é dirigida aos estudantes que queiram vender ou comprar livros técnicos.
-          </p>
-          <p>
-            É uma oportunidade tanto para "reciclar" os vossos antigos livros como para comprar os novos livros de que precisam com descontos de feira!
-          </p>
-        <?php 
-          }else{
-        ?>
-          <table id="available-books" class="table">
+        <table id="available-books-4sale" class="table" id="available-books">
             <th>#</th>
             <th>Informações</th>
             <th>Preço</th>
-        <?php
-            while($r = mysqli_fetch_array($qry)){
-
-  
-        ?>
-            <tr>
-              <td class='book-cover'><image src="images/<?php echo $r['isbn'];?>.jpg" align="middle"></td>
-              <td>
-                <div class="book-info">
-                <ul>
-                  <li><span>ISBN:</span> <?php echo $r['isbn']; ?></li>
-                  <li><span>Título:</span> <?php echo utf8_encode($r['name']); ?></li>
-                  <li><span>Autores:</span> <?php echo utf8_encode($r['author1']); ?> , <?php echo $r['author2']; ?></li>
-                  <!-- TODO: corrigir para caso não exista autor2 -->
-                </ul>
-                </div>
-              </td>
-              <td class="book-price">0.00&euro;</td>
-            </tr>
-        <?php
-          }}
-            
-        ?>
         </table>
       </div>
     </div>
@@ -125,5 +88,6 @@
         </div>
     </footer>
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/book-sale.js"></script>
   </body>
 </html>

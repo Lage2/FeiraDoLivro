@@ -56,7 +56,7 @@ if(login_check($mysqli) == true)
 			$seller_bind 	= $seller_session;
 			$price_bind		= $price_post;
 
-			//$stmt2->execute();
+			$stmt2->execute();
 			$stmt2->close();
 
 			$data = array('error'=>0);
