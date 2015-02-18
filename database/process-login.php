@@ -16,7 +16,7 @@ if(isset($_POST['email'], $_POST['password'])) {
    if(login($email_post, $password_post, $mysqli) == true) {
       // Login com sucesso
       $_SESSION['email'] = $email_post; // Pega o valor da coluna 'id do registro encontrado no MySQL
-      $_SESSION['password'] = $password_post; // Pega o valor da coluna 'nome' do registro encontrado no MySQL
+      //$_SESSION['password'] = $password_post; // Pega o valor da coluna 'nome' do registro encontrado no MySQL
       echo json_encode($data);
    } else {
       $data = array('error' => 1);
