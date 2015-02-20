@@ -27,24 +27,30 @@ if(isset($_POST['isbn'])){
 
 		$stmt->bind_result($title, $author1, $author2_res);
 
-		$stmt->fetch();
-		$stmt->close();
+		if($stmt->fetch()){
+			$stmt->close();
+			$title 	 = utf8_encode($title);
+			$author1 = utf8_encode($author1);
+			$author2 = utf8_encode($author2);
 
-		$title 	 = utf8_encode($title);
-		$author1 = utf8_encode($author1);
-		$author2 = utf8_encode($author2);
-
-		$data = array('error'=> 0, 'title'=> $title, 'author1'=> $author1, 'author2' => $author2);
-		echo json_encode($data);
-		die;
+			$book = array('title'=> $title, 'author1'=> $author1, 'author2' => $author2);
+			$data = array('error'=>0, 'registered'=> true, 'book'=>$book);
+			echo json_encode($data);
+			die;			
+		}else{
+			//Query http://isbndb.com/ for book
+			//TODO
+			$data = array('error'=> 0, 'registered'=>false, 'book'=>null);
+			echo json_encode($data);
+			die;			
+		}
 	}else{
 		$data = array('error'=>2);
 		echo json_encode($data);
 		die;
 	}
 
-	//Query http://isbndb.com/ for book
-	//TODO
+	
 
 }else{
 	$data = array('error'=>1);

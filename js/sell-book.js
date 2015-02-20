@@ -44,7 +44,7 @@ function checkISBN(event){
 		console.log('query for '+isbn);
 
 		var data = new FormData();
-		data.append('isbn', isbn);
+		data.append('isbn', isbn.trim());
 
 		$.ajax({
 			url: 'database/search-book.php',
@@ -59,13 +59,18 @@ function checkISBN(event){
 				console.log(data);
 
 				if (data.error == 0){
-					console.log("Success: "+data.title+' || '+data.author1+' || '+data.author2);
-					
-					title_input.val(data.title).attr('disabled', 'disabled');
-					author1_input.val(data.author1).attr('disabled', 'disabled');
-					if(data.author2==='none') author2_input.attr('disabled','disabled'); else author2.val(data.author2);
 
-					$('#book-cover-holder').empty().append("<img class='book-cover' src=images/"+isbn+".jpg>");
+					if(data.registered){
+						title_input.val(data.book.title).attr('disabled', 'disabled');
+						author1_input.val(data.book.author1).attr('disabled', 'disabled');
+						if(data.book.author2==='none') author2_input.attr('disabled','disabled'); else author2.val(data.book.author2);
+						$('#book-cover-holder').empty().append("<img class='book-cover' src=images/"+isbn+".jpg>");
+					}else{
+						console.log("new book");
+						//TODO: do something else
+					}
+					
+					
 
 				}else
 					console.log("Error: " + data.error);
@@ -83,8 +88,8 @@ function registerBookSale(event){
 
 	event.stopPropagation();
 
-	var isbn 	= isbn_input.val();
-	var price 	= price_input.val();
+	var isbn 	= isbn_input.val().trim();
+	var price 	= price_input.val().trim();
 
 	if(!validateISBN(isbn)){
 		console.log("Error: invalid ISBN");
@@ -99,11 +104,11 @@ function registerBookSale(event){
 	}
 
 	var data = new FormData();
-	data.append('isbn', isbn_input.val());
-	data.append('name', title_input.val());
-	data.append('author1', author1_input.val());
-	data.append('author2', author2_input.val());
-	data.append('price', price_input.val());
+	data.append('isbn', isbn_input.val().trim());
+	data.append('name', title_input.val().trim());
+	data.append('author1', author1_input.val().trim());
+	data.append('author2', author2_input.val().trim());
+	data.append('price', price_input.val().trim());
 
 	$.ajax({
 			url: 'database/process-sell-book.php',

@@ -65,7 +65,7 @@ body {
 	}
 }
 
-#available-books, #available-books-4sale {
+#available-books, #available-books-4sale, #mybooks-container {
 
 	ul{ margin-top: 50px; }
 
@@ -104,9 +104,12 @@ body {
 }
 
 footer{
-	position:absolute;
+
+	//bottom:0;
+	//position:absolute;
+
 	width: 100%;
-   	bottom:0;
+   	
 
 	height: 120px;
 	background-color: #F4F4F4;
@@ -220,6 +223,27 @@ footer{
 		#success { display: none;}
 		#error{ display: none;}
 		.fa { font-size: 1.5em;}
+	}
+
+}
+
+
+#mybooks-container{
+
+	#mybooks-sidebar{
+		position: fixed;
+		top: 60px;
+		#mybooks-sidebar-holder { height: 100%; }
+		.row {
+			margin: 15px 0;
+			padding-left: 15px;
+			font-size: 1.25em;
+
+			a {
+				text-decoration: none;
+				color: @gray-light;
+			}
+		}
 	}
 
 }

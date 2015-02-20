@@ -5,9 +5,9 @@
 
 	$data = array();
 
-	$username_post  = $_POST['username'];
-	$email_post 	= $_POST['email'];
-	$password_post 	= $_POST['password'];
+	$username_post  = trim($_POST['username']);
+	$email_post 	= trim($_POST['email']);
+	$password_post 	= trim($_POST['password']);
 
 	//Validate Fields
 	if (!filter_var($email_post, FILTER_VALIDATE_EMAIL)) {
@@ -15,9 +15,6 @@
 		echo json_encode($data);
 		die;	
 	}
-
-	//TODO: validate username
-	//TODO: valide password
 
 	//Check for duplicate values
 	$dup_username 	= false;

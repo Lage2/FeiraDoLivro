@@ -70,6 +70,10 @@
           <label for="password">Password</label>
           <input type="password" class="form-control" id="password" name="password" placeholder="Introduza a sua password" required>
         </div>
+        <div class="form-group">
+          <label for="password">Confirmar Password</label>
+          <input type="password" class="form-control" id="passwordc" name="passwordc" placeholder="Introduza a sua password" required>
+        </div>
         <div class="checkbox">
           <label>
             <input type="checkbox" required> Li e aceito os regulamentos acima descritos
@@ -103,7 +107,8 @@
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" scr="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/sha512.js"></script>
-    <script type="text/javascript" src="js/forms.js"></script>    
-    <script type="text/javascript" src="js/registrar.js"></script>
+    <script type="text/javascript" scr="validate.js"></script>  
+    <script type="text/javascript" scr="alerts.js"></script>  
+    <script type="text/javascript" src="js/registar.js"></script>
   </body>
 </html>

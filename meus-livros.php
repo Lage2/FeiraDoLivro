@@ -37,18 +37,8 @@
 
         <!-- TODO: devo linkar o js para isto funcionar -->
         <div class="collapse navbar-collapse" id="nav-collapse">
-          <form class="navbar-form navbar-right" role="search">
-            <div class="form-group">
-              <input id="isbn" type="text" class="form-control" placeholder="Procurar ISBN">
-            </div>
-            <button id="search" type="button" class="btn btn-default">
-              <i class="fa fa-search"></i>
-            </button>
-          </form>
-
           <ul class="nav navbar-nav navbar-right">
               <?php if($logged) { ?><li><a href="vender-livro.php">Vender Livro</a></li><?php } ?>
-              <?php if($logged) { ?><li><a href="meus-livros.php">Os meus Livros</a></li><?php } ?>
               <?php if(!$logged){ ?><li><a href="login.php">Entrar</a></li><?php } ?>
               <?php if($logged) { ?><li><a href="database/process-logout.php">Sair</a></li> <?php } ?>
               <?php if(!$logged){ ?><li><li><a href="registar.php">Registar</a></li><?php } ?>
@@ -56,15 +46,48 @@
         </div>
       </div>
     </nav>
-
-    <div id="main" class="container">
-      <div class="panel panel-default">
-        <table id="available-books-4sale" class="table" id="available-books">
-            <th>#</th>
-            <th>Informações</th>
-            <th>Preço</th>
-        </table>
-      </div>
+    <div id="mybooks-container" class="container">
+      <div class="row">
+        <div id="mybooks-sidebar-holder" class="col-md-2">
+          <div id="mybooks-sidebar">
+            <div class="row">
+              <a id="mybooks-invalid-link" class="" href="#mybooks-invalid">Livros por validar</a>
+            </div>
+            <div class="row">
+              <a id="mybooks-valid-link" class="section-link" href="#mybooks-valid">Livros valiados</a>
+            </div>
+            <div class="row">
+              <a id="mybooks-sold-link" class="section-link" href="#mybooks-sold">Livros vendidos</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10">
+            <div class="panel panel-default">
+              <div class="panel-heading">Os meus livros por validar</div>
+              <table id="mybooks-invalid" class="table" id="available-books">
+                  <th>#</th>
+                  <th>Informações</th>
+                  <th>Preço</th>
+              </table>
+            </div>
+            <div class="panel panel-default">
+            <div class="panel-heading">Os meus livros validados</div>
+              <table id="mybooks-valid" class="table" id="available-books">
+                  <th>#</th>
+                  <th>Informações</th>
+                  <th>Preço</th>
+              </table>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">Os meus livros vendidos</div>
+              <table id="mybooks-sold" class="table" id="available-books">
+                  <th>#</th>
+                  <th>Informações</th>
+                  <th>Preço</th>
+              </table>
+            </div>
+          </div>
+        </div>
     </div>
 
     <footer>
@@ -89,6 +112,6 @@
         </div>
     </footer>
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="js/book-sale.js"></script>
+    <script type="text/javascript" src="js/mybooks.js"></script>
   </body>
 </html>

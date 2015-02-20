@@ -61,7 +61,7 @@ if(login_check($mysqli) == true)
 
 			$data = array('error'=>0);
 			echo json_encode($data);
-			die;	
+			die;
 
 		}else{
 			$data = array('error'=>2.2);

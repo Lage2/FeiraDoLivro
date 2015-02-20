@@ -1,8 +1,11 @@
-var isbn_input;
+function populateBooks(element, books){
 
-function populate4SaleTable(books){
+	if(books.length == 0){
+		element.parent().toggle();
+		return;
+	}
 
-	$('#available-books-4sale').find("tr:gt(0)").remove();
+	element.find("tr:gt(0)").remove();
 
 	$.each(books, function(index, book){
 
@@ -18,7 +21,6 @@ function populate4SaleTable(books){
 					+ "<td>"
 					+	"<div class='book-info'>"
 					+		"<ul>"
-					+			"<li><span>Produto:  </span>"+book.id+"</li>"
 					+			"<li><span>ISBN:  </span>"+book.isbn+"</li>"
 					+           "<li><span>Título:  </span>"+ book.title +"</li>"
 					+           "<li><span>Autores:  </span>"+authors+"</li>"
@@ -27,26 +29,19 @@ function populate4SaleTable(books){
 					+ "</td>"
 					+ "<td class='book-price'>"+book.price+"</td>";
 
-		$('#available-books-4sale').append(item);
+		element.append(item);
 		
 	});
-
-	isbn_input.val("");
 }
 
-function queryBooks4Sale(event){
+
+function retrieveMyBooks(){
 
 	var data = new FormData();
-	var isbn = isbn_input.val();
-
-	if(isbn!=""){
-		console.log("searching for book "+isbn);
-		data.append('isbn', isbn.trim());
-	}
 
 
 	$.ajax({
-		url: 'database/search-book-4sale.php',
+		url: 'database/search-my-books.php',
 		type: 'post',
 		data: data,
 		cache: false,
@@ -58,23 +53,21 @@ function queryBooks4Sale(event){
 			console.log(data);
 
 			if (data.error == 0){
-				console.log("success"+data.books.length);
-				populate4SaleTable(data.books);
+				populateBooks($('#mybooks-invalid'), data.invalid);
+				populateBooks($('#mybooks-valid'), data.valid);
+				populateBooks($('#mybooks-sold'), data.sold);								
 			}else
-				console.log("error: "+data.error);
+				console.log("Error: " + data.error);
 			}, 
 		error: function(jqXHR, textStatus, errorThrown){
 			console.log("Fail: "+textStatus+' || '+errorThrown);
 		}
 	});
+
+
+
 }
 
-
-
 $(document).ready(function(){
-	
-	isbn_input = $('#isbn');
-	queryBooks4Sale(null);
-	$('#search').on('click', queryBooks4Sale);
-
+	retrieveMyBooks();
 });
