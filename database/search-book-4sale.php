@@ -50,7 +50,6 @@ if(isset($_POST['isbn'])){
 
 		$data = array('error'=>0, 'books'=>$books_4sale);
 		echo json_encode($data);
-		//echo print_r($data);
 		die;
 	}else{
 		$data = array('error'=>2);

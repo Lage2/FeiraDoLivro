@@ -1,3 +1,13 @@
+<?php
+include 'database/db_connect.php';
+include 'database/functions.php';
+
+sec_session_start();
+
+if(login_check($mysqli) == true) { header('Location: index.php'); }
+?>
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,7 +19,10 @@
     <!-- Fontawesome Icons -->
     <link href="css/font-awesome.min.css" rel="stylesheet"/>
 
-    
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" scr="js/validate.js"></script>
+    <script type="text/javascript" src="js/sha512.js"></script>
+    <script type="text/javascript" src="js/registar.js"></script>
   </head>
   <body>
     <nav id="navigation" class="navbar navbar-fixed-top" role="navigation">
@@ -103,12 +116,5 @@
         </div>
         </div>
     </footer>
-    
-    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" scr="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/sha512.js"></script>
-    <script type="text/javascript" scr="validate.js"></script>  
-    <script type="text/javascript" scr="alerts.js"></script>  
-    <script type="text/javascript" src="js/registar.js"></script>
   </body>
 </html>

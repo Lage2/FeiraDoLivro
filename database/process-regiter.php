@@ -1,17 +1,30 @@
 <?php
 
-	include 'db_connect.php';
-	include 'functions.php';
+include 'db_connect.php';
+include 'functions.php';
+
+sec_session_start();
+
+if(login_check($mysqli) == true){ header('Location: '. 'index.php'); die(); }
+
+if(isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['passwordc'])){
 
 	$data = array();
 
 	$username_post  = trim($_POST['username']);
 	$email_post 	= trim($_POST['email']);
 	$password_post 	= trim($_POST['password']);
+	$passwordc_post	= trim($_POST['passwordc']);
 
 	//Validate Fields
 	if (!filter_var($email_post, FILTER_VALIDATE_EMAIL)) {
-    	$data = array('error' => 'Por favor introduza um endereço e-mail correcto.' , 'erro-code' => 3);
+    	$data = array('error' => 3 , 'message' => 'Por favor introduza um endereço e-mail correcto.');
+		echo json_encode($data);
+		die;	
+	}
+
+	if($password_post != $passwordc_post){
+		$data = array('error' => 4 , 'message' => 'Atenção, as passwords não coincidem');
 		echo json_encode($data);
 		die;	
 	}
@@ -43,22 +56,23 @@
 
 		$stmt1->close();
 
-		if($dup_username) $data = array('error' => 'O nome de utilizador já se encontra registado.' , 'erro-code' => 1);
-		if($dup_email) 	  $data = array('error' => 'O email já se encontra registado.', 'error-code' => 2);
+		if($dup_username) $data = array('error' => 1, 'message' => 'O nome de utilizador já se encontra registado.');
+		if($dup_email) 	  $data = array('error' => 2, 'message' => 'O email já se encontra registado.');
 		
 		if($dup_username || $dup_email){
 			echo json_encode($data);
 			die;
-		}		
+		}
+
 	}else{
-		$data = array('error' => 'De momento é impossível completar o registo, por favor tente mais tarde.' , 'erro-code' => 0);
+		$data = array('error' =>  5, 'erro-code' => 'De momento é impossível completar o registo, por favor tente mais tarde.');
 		echo json_encode($data);
 		die;
 	}
 
 
 	//Register User
-	$password = hash('sha512',$_POST['password']);
+	//$password = hash('sha512',$_POST['password']);
 
 	// Crie um salt aleatório
 	$random_salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
@@ -76,11 +90,18 @@
 		$stmt2->execute();
 		$stmt2->close();
 
+		$data = array('error'=>0);
 		echo json_encode($data);
 		
 	}else{
-		$data = array('error' => 'De momento é impossível completar o registo, por favor tente mais tarde.' , 'erro-code' => 0);
+		$data = array('error' =>  5, 'erro-code' => 'De momento é impossível completar o registo, por favor tente mais tarde.');
 		echo json_encode($data);
 		die;
 	}
+
+}else{
+	$data = array('error' =>  5, 'erro-code' => 'De momento é impossível completar o registo, por favor tente mais tarde.');
+	echo json_encode($data);
+	die;
+}
 ?>

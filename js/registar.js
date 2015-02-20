@@ -1,74 +1,105 @@
 var error = false;
-var username_input  = $('input[name=username]');
-var email_input		= $('input[name=email]');
-var password_input  = $('input[type=password]');
-var accepts_input   = $('input[type=checkbox]')
+var username_input  	= $('input[name=username]');
+var email_input			= $('input[name=email]');
+var password_input		= $('input[name=password]');
+var confirm_pass_input	= $('input[name=passwordc]');
+var accepts_input   	= $('input[type=checkbox]');
 
 function clear_alerts(){
 	$('#error').empty();
 	$('#success').empty();
 }
 
-function validateUsernameField(event){
-	event.stopPropagation();
+function toggleSuccessAlert(message){
 
-	var username = username_input.val();
+	message = "<p><i class='fa fa-check'></i>  "
+			+ message
+			+ "</p>";
 
-	if(!validateUsername(username))
-		toggleErrorAlert("Por valor insira ");
+	$('#error').css('display', 'none');
+	$('#success').append(message);
+	$('#success').toggle('fast');
+	$('#submit').attr('disabled', 'disabled');
+	setTimeout("location.href = 'index.php';", 5000);	
+}
+
+function toggleErrorAlert(message){
+
+	message = "<p><i class='fa fa-times'></i>  "+ message + "</p>";
+	$('#error').empty();
+	$('#error').append(message);
+	$('#error').toggle('fast');
+	setTimeout ( "$('#error').toggle('slow')" , 3000 );
 
 }
 
-function validateFields(event){
-	
-	var username = username_input.val();
-	var email 	 = email_input.val();
-	var password = password_input.val();
+function validateUsername(username){
+	var filter = /^[a-z0-9._]+$/i;
+	return filter.test(username);
+}
 
-	var res;
+function validateUsernameLength(username){
+	return username.length > 5 && username.length <= 15;
+}
 
-	if(accepts_input.is(':checked')){
+/* Pelo menos 8 caracteres 1 número, uma letra e um caracter especial */
+function validatePassword(password){
+	//var filter = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
+	var filter = /^(?=.*\d)(?=.*[a-z])(?=[A-Z]*)(?=[\W]*).{6,12}$/;
+	return filter.test(password);
+}
 
-		res = validateUsername(username);
-		if(!res.valid)
-			return res;
 
-		res = validateEmail(email);
-		if(!res.valid)
-			return res;
+function validateEmail(email) { 
+    var filter = /^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$/;
+    return filter.test(email);
+}
 
-		res = validatePassword(password);
-		if(!res.valid)
-			return res;
-
-		return {'valid':true};
-		
-	}else{
-
-		return {
-			'valid': false,
-			'message': 'Para se registar precisa de concordar com os regulamentos.'
-		};
-	}
+function matchingPasswords(pass1, pass2){
+	return pass1.trim() == pass2.trim();
 }
 
 function processUser(event){
-	
+
+
 	clear_alerts();
 
-	var validation_res = validateFields();
+	var username 	= username_input.val().trim();
+	var email 	 	= email_input.val().trim();
+	var pass1	 	= password_input.val().trim();
+	var pass2	 	= confirm_pass_input.val().trim();
 
-	if(!validation_res.valid){
-		console.log("here "+validation_res.message);
-		toggleErrorAlert(validation_res.message);
+	if(!validateUsername(username)){
+		toggleErrorAlert("O nome de utilizador inserido não é válido, por favor insira um nome de utilizador com caractéres alfa-numéricos, '.' ou '_'.");
+		return;
+	}
+
+	if(!validateUsernameLength(username)){
+		toggleErrorAlert("O nome de utilizador inserido não é válido, este deve ter entre 5 e 15 caractéres.");
+		return;
+	}
+
+	if(!validateEmail(email)){
+		toggleErrorAlert("O endereço email inserido não é válido, por favor insira um endereço email válido.");
+		return;	
+	}
+
+	if(!validatePassword(pass1)){
+		toggleErrorAlert("A password inserida não é válida, as passwords devem ter entre 6 a 12 caractéres e pelo menos um número e uma letra.");
+		return;	
+	}
+
+	if(!matchingPasswords(pass1, pass2)){
+		toggleErrorAlert("Atenção, as passwords inseridas não coincidem.");
 		return;
 	}
 	
 	var data = new FormData();
 
-	data.append('username', username_input.val());
-	data.append('email', email_input.val());
-	data.append('password', password_input.val());
+	data.append('username', username);
+	data.append('email', email);
+	data.append('password', hex_sha512(pass1));
+	data.append('passwordc', hex_sha512(pass2));
 	
 	$.ajax({
 		url: 'database/process-regiter.php',
@@ -80,11 +111,10 @@ function processUser(event){
 		contentType: false,
 		success: function(data, textStatus, jqXHR){
 	
-			if (typeof data.error === 'undefined'){
-				console.log("Success: "+data.error);
-				toggleSuccessAlert();
+			if (data.error == 0){
+				toggleSuccessAlert("O seu registo foi realizado com sucesso, irá ser redireccionado para a página principal dentro de momentos.");
 			}else
-				toggleErrorAlert(data.error);
+				toggleErrorAlert(data.message);
 		}, 
 		error: function(jqXHR, textStatus, errorThrown){
 			console.log("Fail: "+textStatus);
@@ -95,13 +125,12 @@ function processUser(event){
 /* MAIN */
 $(document).ready(function(){
 
-	var username_input  	= $('input[name=username]');
-	var email_input			= $('input[name=email]');
-	var password_input		= $('input[name=password]');
-	var confirm_pass_input	= $('input[name=passwordc]');
-	var accepts_input   	= $('input[type=checkbox]');
+	username_input  	= $('input[name=username]');
+	email_input			= $('input[name=email]');
+	password_input		= $('input[name=password]');
+	confirm_pass_input	= $('input[name=passwordc]');
+	accepts_input   	= $('input[type=checkbox]');
 	
 	$('#submit').on('click', processUser);
-	var username_input.on('blur', validateUsernameField);
 
 });
