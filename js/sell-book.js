@@ -11,7 +11,7 @@ function clearForm(event){
 	title_input.val("").removeAttr('disabled');
 	author1_input.val("").removeAttr('disabled');
 	author2_input.val("").removeAttr('disabled');
-	$('#book-cover-holder').empty();
+	$('#book-cover-holder').empty().append("<p><i class='fa fa-book'></i></p>");
 }
 
 function toggleSuccessAlert(){
@@ -39,6 +39,10 @@ function toggleErrorAlert(message){
 function checkISBN(event){
 	console.log("updating...");	
 	var isbn = isbn_input.val().trim();
+	
+	var filter = /^[0-9]{13}$/;
+	console.log(filter.test(isbn));
+
 
 	if(validateISBN(isbn)){
 		console.log('query for '+isbn);
@@ -81,6 +85,7 @@ function checkISBN(event){
 		});
 	}else{
 		console.log("invalid isbn :'"+isbn+"'");
+		clearForm();
 	}
 }
 
@@ -143,4 +148,6 @@ $(document).ready(function(){
 	isbn_input.on('blur', checkISBN);
 	$('#trash').on('click', clearForm);
 	$('#submit').on('click', registerBookSale);
+
+	
 });

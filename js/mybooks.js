@@ -1,3 +1,23 @@
+function updateSidebarLinks(data){
+	
+	if(data.invalid.length <= 0)
+		$('#mybooks-invalid-link').css('display', 'none');
+	else
+		$('#mybooks-invalid-link').css('display', 'block');
+
+	if(data.valid.length <= 0)
+		$('#mybooks-valid-link').css('display', 'none');
+	else
+		$('#mybooks-valid-link').css('display', 'block');
+
+	if(data.sold.length <= 0)
+		$('#mybooks-sold-link').css('display', 'none');
+	else
+		$('#mybooks-sold-link').css('display', 'block');
+
+}
+
+
 function populateBooks(element, books){
 
 	if(books.length == 0){
@@ -55,7 +75,8 @@ function retrieveMyBooks(){
 			if (data.error == 0){
 				populateBooks($('#mybooks-invalid'), data.invalid);
 				populateBooks($('#mybooks-valid'), data.valid);
-				populateBooks($('#mybooks-sold'), data.sold);								
+				populateBooks($('#mybooks-sold'), data.sold);
+				updateSidebarLinks(data);							
 			}else
 				console.log("Error: " + data.error);
 			}, 
@@ -70,4 +91,19 @@ function retrieveMyBooks(){
 
 $(document).ready(function(){
 	retrieveMyBooks();
+
+	var root = $('html,body');
+	$('div a[href*=#]:not([href=#])').click(function(){
+		if(location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+			&& location.hostname == this.hostname) {
+			var target = $(this.hash);
+			target = target.length ? target : $('[name='+ this.hash.slice(1) + ']');
+			if(target.length) {
+				root.animate({
+					scrollTop: target.offset().top - $('#navigation').height() - 40
+				}, 1000);
+			}
+			return false;
+		}
+	});
 });

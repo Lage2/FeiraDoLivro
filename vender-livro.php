@@ -36,6 +36,7 @@
         <!-- TODO: devo linkar o js para isto funcionar -->
         <div class="collapse navbar-collapse" id="nav-collapse">
           <ul class="nav navbar-nav navbar-right">
+              <?php if($logged) { ?><li><a href="meus-livros.php">Os Meus Livros</a></li> <?php } ?>
               <?php if($logged) { ?><li><a href="database/process-logout.php">Sair</a></li> <?php } ?>
               <li><a href="index.php"><i class="fa fa-undo"></i>  Regressar</a></li>
           </ul>
@@ -58,7 +59,7 @@
             <div class="input-group input-group-lg">
             <span class="input-group-addon" id="isbn-addon">ISBN</span>
               <input  type="text" class="form-control" id="isbn" name="isbn" placeholder="Introduza o ISBN do livro" aria-describedby="isbn-addon" 
-                      pattern="[0-9]+" minlength="13" maxlength="13" required>
+                      pattern="[0-9]+" minlength="13" maxlength="14" required>
             </div>
             <div class="input-group input-group-lg">
               <span class="input-group-addon" id="title-addon">Título</span>
@@ -85,6 +86,7 @@
         </div>
         <div class="col-md-4">
           <div id="book-cover-holder">
+            <p><i class="fa fa-book"></i></p>
           </div>
         </div>
       </div>
