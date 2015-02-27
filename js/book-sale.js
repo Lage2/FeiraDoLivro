@@ -1,4 +1,4 @@
-var isbn_input;
+﻿var isbn_input;
 
 function populate4SaleTable(books){
 
@@ -8,9 +8,9 @@ function populate4SaleTable(books){
 
 		var authors;
 		if(book.author2=="")
-			authors = book.author1;
+			authors = decodeURIComponent(escape(book.author1));
 		else
-			authors = book.author1 + ', ' + book.author2;
+			authors = decodeURIComponent(escape(book.author1)) + ', ' + decodeURIComponent(escape(book.author2));
 
 
 		var item = "<tr class="+ ((index % 2) ? 'color':'')+">"

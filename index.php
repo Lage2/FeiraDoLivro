@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <?php 
   //header("Content-Type: text/html; charset=charset=utf-8",true);
   //header('Content-Type:text/xml; charset=UTF-8', true);
@@ -78,7 +78,7 @@
           </div>
             <div id="copyrights"class="col-md-6">
             <p>
-              Copyright &copy; 2014 <a href="http://lage.tecnico.ulisboa.pt">LAGE2</a>.
+              Copyright &copy; 2014 <a href="http://lage2.tecnico.ulisboa.pt">LAGE2</a>.
               Todos os direitos reservados.
             </p>
             <p>
@@ -89,6 +89,6 @@
         </div>
     </footer>
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="js/book-sale.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/book-sale.js"></script>
   </body>
 </html>
