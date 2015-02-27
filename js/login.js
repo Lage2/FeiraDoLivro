@@ -75,7 +75,7 @@ function login(event){
 				$('#error').css('display', 'none');
 				window.location.replace("index.php");
 			}else
-				console.log("Error: "+data.error);
+				toggleErrorAlert(data.message);
 		}, 
 		error: function(jqXHR, textStatus, errorThrown){
 			console.log("Fail: "+textStatus);

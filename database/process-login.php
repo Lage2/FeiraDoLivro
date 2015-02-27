@@ -19,11 +19,11 @@ if(isset($_POST['email'], $_POST['password'])) {
       //$_SESSION['password'] = $password_post; // Pega o valor da coluna 'nome' do registro encontrado no MySQL
       echo json_encode($data);
    } else {
-      $data = array('error' => 1);
+      $data = array('error' => 1, 'message'=>'Credênciais erradas, por favor tente novamente');
       echo json_encode($data);
    }
 } else { 
-   $data = array('error' => 1);
+   $data = array('error' => 1, 'message'=>'Por favor preencha os campos e tente novamente.');
    echo json_encode($data);
 }
 ?>
