@@ -58,7 +58,16 @@
     </nav>
 
     <div id="main" class="container">
-      <div class="panel panel-default">
+      <div id="alert-container" class="container">
+        <div id="error" class="alert alert-danger" role="alert">
+          <a href="#" class="alert-link">...</a>
+        </div>
+      </div>
+      <div id="sale-container" class="panel panel-default">
+        <div class="panel-body">
+          Lamentamos mas de momento não se encontram disponíveis livros para venda com o ISBN especificado.
+          <img src="img/feira-do-livro.png">
+        </div>
         <table id="available-books-4sale" class="table" id="available-books">
             <th>#</th>
             <th>Informações</th>
