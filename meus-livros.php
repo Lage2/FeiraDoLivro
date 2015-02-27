@@ -54,7 +54,7 @@
               <a id="mybooks-invalid-link" class="" href="#mybooks-invalid">Livros por validar</a>
             </div>
             <div class="row">
-              <a id="mybooks-valid-link" class="section-link" href="#mybooks-valid">Livros valiados</a>
+              <a id="mybooks-valid-link" class="section-link" href="#mybooks-valid">Livros validados</a>
             </div>
             <div class="row">
               <a id="mybooks-sold-link" class="section-link" href="#mybooks-sold">Livros vendidos</a>
