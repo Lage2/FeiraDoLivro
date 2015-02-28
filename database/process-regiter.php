@@ -73,6 +73,7 @@ if(isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['passwo
 
 	//Register User
 	//$password = hash('sha512',$_POST['password']);
+	$password = $password_post;
 
 	// Crie um salt aleatório
 	$random_salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
@@ -90,7 +91,7 @@ if(isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['passwo
 		$stmt2->execute();
 		$stmt2->close();
 
-		$data = array('error'=>0);
+		$data = array('error'=>0, 'message'=>'Utilizador registado com sucesso.');
 		echo json_encode($data);
 		
 	}else{
