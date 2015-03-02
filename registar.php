@@ -52,12 +52,12 @@ if(login_check($mysqli) == true) { header('Location: index.php'); }
       <div class="well">
         <h3>Regulamentos e Instruções</h3>
         <ol>
-          <li>A Feira do Livro decorrerá entre os dias <span>15 de Setembro a 3 de Outubro de 2014</span>, na sala do LAGE2 (0.43).</li>
+          <li>A Feira do Livro decorrerá a partir de <span>2 de Março de 2015</span>, na sala do LAGE2 (0.43).</li>
           <li>Todos os interessados em participar na Feira do Livro Usado devem entregar os livros para venda na sala do LAGE2 (0.43) entre as 9h e as 17h.</li>
-          <li>As inscrições para a venda dos livros e a recepção dos mesmos decorrem de <span>15 de Setembro a 19 de Setembro</span>.</li>
+          <li>As inscrições para a venda dos livros e a recepção dos mesmos decorrem de <span>2 de Março a 6 de Março</span>.</li>
           <li>10% das receitas obtidas na venda dos livros reverte para despesas da organização.</li>
-          <li>A devolução dos livros não vendidos e entrega de dinheiro das vendas decorrerá nos dias <span>6 de Outubro a 10 de Outubro de 2014 entre as 9h e as 17h</span>, na sala do LAGE2 (0.43).</li>
-          <li>Todos os livros e/ou respectivas receitas que não sejam reclamados até às 17h do dia <span>10 de Outubro de 2014</span> reverterão para a organização.</li>
+          <li>A devolução dos livros não vendidos e entrega de dinheiro das vendas decorrerá nos dias <span>30 de Março a 3 de Abril de 2015 entre as 9h e as 17h</span>, na sala do LAGE2 (0.43).</li>
+          <li>Todos os livros e/ou respectivas receitas que não sejam reclamados até às 17h do dia <span>3 de Abril de 2015</span> reverterão para a organização.</li>
         </ol>
       </div>
 

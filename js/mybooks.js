@@ -41,6 +41,7 @@ function populateBooks(element, books){
 					+ "<td>"
 					+	"<div class='book-info'>"
 					+		"<ul>"
+					+			"<li><span>Identificador:  </span>"+book.id+"</li>"
 					+			"<li><span>ISBN:  </span>"+book.isbn+"</li>"
 					+           "<li><span>Título:  </span>"+ book.title +"</li>"
 					+           "<li><span>Autores:  </span>"+authors+"</li>"

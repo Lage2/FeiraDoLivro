@@ -85,7 +85,7 @@ function checkISBN(event){
 		});
 	}else{
 		console.log("invalid isbn :'"+isbn+"'");
-		clearForm();
+		//clearForm();
 	}
 }
 

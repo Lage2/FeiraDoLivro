@@ -18,9 +18,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     
     <title>Feira do Livro - LAGE2</title>
+    <link rel="shortcut icon" href="img/logo-feira-livro.ico">
 
     <link href="css/style.css" type="text/css" rel="stylesheet"/> 
     <link href="css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Facebook -->
+    <meta property="og:url" content="http://lage2.tecnico.ulisboa.pt/~lage2.daemon/feiradolivro/"/>
+    <meta property="og:title" content="Feira do Livro 2015"/>
+    <meta property="og:description" content="Feira do Livro do LAGE2, edição 2015"/>
+    <meta property="og:image" content="http://lage2.tecnico.ulisboa.pt/~lage2.daemon/feiradolivro/img/feira-do-livro.png"/>
 
 
   </head>

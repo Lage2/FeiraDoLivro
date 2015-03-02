@@ -64,7 +64,7 @@ $valor_vendas += $r['price'];
 <th width="50%" align="left" style="border:0px; padding:0px;">
 <br>Nome: <?php echo $r2['name']; ?><br><br>ISBN: <?php echo $r['isbn']; ?><br><br>Vendedor: <?php echo $r['seller']; ?><br><br>Preço: <?php echo $r['price']; ?><br>
 </th>
-<td width="25%" align="center" style="border:0px; padding:0px;"><image src="images/<?php echo $r['isbn'];?>.jpg" align="middle" height="150px"></td>
+<td width="25%" align="center" style="border:0px; padding:0px;"><image src="../images/<?php echo $r['isbn'];?>.jpg" align="middle" height="150px"></td>
 </tr>  
 </table>
 <br>

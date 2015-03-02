@@ -66,7 +66,7 @@ Autor 2: <input name="autor2" type="text" size="40" maxlength="50" value="<?php 
 Valor: <input name="price" step="0.01" min="0.01" max="249.99" type="number" size="40" autofocus required/> Euro
 <br>
 </td>
-<td width="50%" style="border:0px; padding:0px;"><image src="images/<?php echo $r['isbn'];?>.jpg" align="middle" height="250px"></td>
+<td width="50%" style="border:0px; padding:0px;"><image src="../images/<?php echo $r['isbn'];?>.jpg" align="middle" height="250px"></td>
 <tr>
 <td><input name="enviar" type="submit" style="height: 50px; width: 150px" value="Regista Venda"/></td><br><br>
 </tr>

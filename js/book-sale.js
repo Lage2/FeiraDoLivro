@@ -54,7 +54,7 @@ function populate4SaleTable(books){
 						+		"<ul>"
 						+			"<li><span>Produto:  </span>"+book.id+"</li>"
 						+			"<li><span>ISBN:  </span>"+book.isbn+"</li>"
-						+           "<li><span>Título:  </span>"+ book.title +"</li>"
+						+           "<li><span>Título:  </span>"+ decodeURIComponent(escape(book.title)) +"</li>"
 						+           "<li><span>Autores:  </span>"+authors+"</li>"
 						+		"</ul>"
 						+	"</div>"

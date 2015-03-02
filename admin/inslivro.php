@@ -1,4 +1,4 @@
-﻿<?php header("Content-Type: text/html; charset=ISO-8859-1",true);
+﻿<?php
 include 'db_connect.php';
 include 'functions.php';
 include 'db_clientes_connect.php';
@@ -53,7 +53,7 @@ mysqli_query($mysqli_client,$pedido) or die(mysqli_error($mysqli_client));
 					echo $image_name;
 
                     //Directoria para a qual a imagem será enviada
-                    $newname="images/".$image_name;
+                    $newname="../images/".$image_name;
 
                     //Efectua o upload da imagem para a directoria
                     $copied = copy($_FILES['imagem']['tmp_name'], $newname);

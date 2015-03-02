@@ -13,13 +13,13 @@ if(login_check($mysqli) == true){
 		$username_session = $_SESSION['username'];
 
 		$stmt = $mysqli_client->stmt_init();
-		if($stmt->prepare("SELECT isbn, name, author1, author2, seller, price, valid, sold FROM book NATURAL JOIN product_book WHERE seller=?")){
+		if($stmt->prepare("SELECT id, isbn, name, author1, author2, seller, price, valid, sold FROM book NATURAL JOIN product_book WHERE seller=?")){
 			$stmt->bind_param("s", $seller_bind);
 			$seller_bind = $username_session;
 
 			$stmt->execute();
 
-			$stmt->bind_result($isbn, $title, $author1, $author2, $seller, $price, $valid, $sold);
+			$stmt->bind_result($id, $isbn, $title, $author1, $author2, $seller, $price, $valid, $sold);
 
 			$myBooks_sold = array();
 			$myBooks_valid = array();
@@ -28,11 +28,11 @@ if(login_check($mysqli) == true){
 			while ($stmt->fetch()) {
 
 				if($valid != '1')
-					array_push($myBooks_invalid, array('isbn'=>$isbn, 'title'=>utf8_encode($title), 'author1'=>utf8_encode($author1), 'author2'=>utf8_encode($author2), 'seller'=>$seller, 'price'=>$price));					
+					array_push($myBooks_invalid, array('id'=>$id, 'isbn'=>$isbn, 'title'=>utf8_encode($title), 'author1'=>utf8_encode($author1), 'author2'=>utf8_encode($author2), 'seller'=>$seller, 'price'=>$price));					
 				else if($sold == '1')
-					array_push($myBooks_sold, array('isbn'=>$isbn, 'title'=>utf8_encode($title), 'author1'=>utf8_encode($author1), 'author2'=>utf8_encode($author2), 'seller'=>$seller, 'price'=>$price));
+					array_push($myBooks_sold, array('id'=>$id,'isbn'=>$isbn, 'title'=>utf8_encode($title), 'author1'=>utf8_encode($author1), 'author2'=>utf8_encode($author2), 'seller'=>$seller, 'price'=>$price));
 				else
-					array_push($myBooks_valid, array('isbn'=>$isbn, 'title'=>utf8_encode($title), 'author1'=>utf8_encode($author1), 'author2'=>utf8_encode($author2), 'seller'=>$seller, 'price'=>$price));										
+					array_push($myBooks_valid, array('id'=>$id,'isbn'=>$isbn, 'title'=>utf8_encode($title), 'author1'=>utf8_encode($author1), 'author2'=>utf8_encode($author2), 'seller'=>$seller, 'price'=>$price));										
 
 				//array_push($myBooks, array('isbn'=>$isbn, 'title'=>utf8_encode($title), 'author1'=>utf8_encode($author1), 'author2'=>utf8_encode($author2), 'seller'=>$seller, 'price'=>$price, 'valid'=>$valid, 'sold'=>$sold));
 			}

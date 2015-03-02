@@ -20,8 +20,11 @@ function validateEmail(email) {
 }
 
 function validateISBN(isbn){
-	var filter = /^[0-9]{13}$/;
-	return filter.test(isbn);
+
+	var aux = isbn.trim();
+	var filter = /^[0-9]*$/;
+
+	return (aux.length == 10 || aux.length == 13) && filter.test(aux);
 }
 
 /**
@@ -31,6 +34,6 @@ function validateISBN(isbn){
  * 10.2
  */
 function validatePrice(price){
-	var filter = /^\d+([.,]\d)?$/;
+	var filter = /^\d+([.,](\d+))?$/;
 	return  price > 0 && filter.test(price);
 }

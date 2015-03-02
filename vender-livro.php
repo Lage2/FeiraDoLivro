@@ -59,7 +59,7 @@
             <div class="input-group input-group-lg">
             <span class="input-group-addon" id="isbn-addon">ISBN</span>
               <input  type="text" class="form-control" id="isbn" name="isbn" placeholder="Introduza o ISBN do livro" aria-describedby="isbn-addon" 
-                      pattern="[0-9]+" minlength="13" maxlength="14" required>
+                      pattern="[0-9]+" minlength="13" maxlength="13" required>
             </div>
             <div class="input-group input-group-lg">
               <span class="input-group-addon" id="title-addon">Título</span>
@@ -103,7 +103,7 @@
           </div>
             <div id="copyrights"class="col-md-6">
             <p>
-              Copyright &copy; 2014 <a href="http://lage.tecnico.ulisboa.pt">LAGE2</a>.
+              Copyright &copy; 2014 <a href="http://lage2.tecnico.ulisboa.pt">LAGE2</a>.
               Todos os direitos reservados.
             </p>
             <p>

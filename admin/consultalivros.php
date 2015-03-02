@@ -59,7 +59,7 @@ while($r = mysqli_fetch_array($qry)){
 <th width="50%" align="left" style="border:0px; padding:0px;">
 <br>Nome: <?php echo $r['name']; ?><br><br>ISBN: <?php echo $r['isbn']; ?><br><br>Autor 1: <?php header("Content-Type: text/html; charset=ISO-8859-1",true); echo $r['author1']; ?><br><br>Autor 2: <?php echo $r['author2']; ?><br>
 </th>
-<td width="25%" align="center" style="border:0px; padding:0px;"><image src="images/<?php echo $r['isbn'];?>.jpg" align="middle" height="150px"></td>
+<td width="25%" align="center" style="border:0px; padding:0px;"><image src="../images/<?php echo $r['isbn'];?>.jpg" align="middle" height="150px"></td>
 </tr>  
 </table>
 <br>

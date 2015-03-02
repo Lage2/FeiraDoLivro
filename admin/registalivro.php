@@ -1,4 +1,4 @@
-﻿<?php header("Content-Type: text/html; charset=ISO-8859-1",true);
+﻿<?php
 include 'db_connect.php';
 include 'functions.php';
 include 'db_clientes_connect.php';
